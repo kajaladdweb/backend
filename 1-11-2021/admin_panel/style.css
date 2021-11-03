@@ -1,0 +1,25 @@
+table tr td
+{
+  text-align: center;
+  padding: 10px;
+}
+body{
+  
+    margin-top: 10px;
+}/*
+label
+{
+    padding-top: 40px;
+} */
+table{
+
+  border: 2px solid red;
+}
+.btn:hover
+{
+    background-color: pink;
+}
+.btn
+{
+    border-color: pink;
+}
