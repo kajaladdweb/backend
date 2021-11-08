@@ -36,12 +36,22 @@
 session_start();
 include 'connection.php';
 
+if($_SESSION['email']==''){
+    header('Location:login.php');
+}
 
-$email=$_SESSION['email'];
-$query1=mysqli_query($con,"select s_name from student where s_email='$email'");
+ else{
 
-$row1=mysqli_fetch_array($query1);
-echo "<center>Hello ".$row1['s_name']."</center>";
+    $email=$_SESSION['email'];
+    $query1=mysqli_query($con,"select s_name from student where s_email='$email'");
+
+    $row1=mysqli_fetch_array($query1);
+   
+
+
+    echo "<center><h4>Hello ".$row1['s_name']."</h4></center>";
+ }
+ 
 
 echo "<center><table class='table-primary' border='2'>
     <th>ID</th> 
@@ -65,7 +75,8 @@ while($row=mysqli_fetch_array($query))
     echo "<td>".$row['s_email']."</td>";
     echo "<td>".$row['s_pwd']."</td>";
     echo "<td>".$row['s_mob']."</td>";
-    echo "<td><a href=update1.php?sid=$sid>Edit</a> </td>";
+
+    echo "<td><a href=update1.php?sid=$sid>Edit</a></td>";
 
     echo "<td><a href=delete.php?sid=$sid>Delete</a> </td>";
     echo "</tr>";

@@ -3,18 +3,24 @@
 session_start();
 include 'connection.php';
 
+
+
+
 if($_SESSION['email']==''){
-header('Location:Login.php');
+header('Location:login.php');
 }
 else{
 
+
+
+$email=$_SESSION['email'];
 $id=$_GET['sid'];
 $email=$_SESSION['email'];
 
 $query1=mysqli_query($con,"select s_name from student where s_email='$email'") or die('Error in query');
 
 $row1=mysqli_fetch_array($query1);
-echo "<center>Hello ".$row1['s_name']."</center>";
+echo "<center><h4>Hello ".$row1['s_name']."</h4></center>";
 
 $query2=mysqli_query($con," select * from student where s_id='$id' ") or die();
 $row2=mysqli_fetch_array($query2);
