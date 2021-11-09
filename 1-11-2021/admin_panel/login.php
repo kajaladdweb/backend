@@ -25,6 +25,12 @@
                 <td> <input type="password" name="password" id="" placeholder="enter your password"></td>
             </tr>
             <tr>
+                <td>
+                <input type="checkbox"  id="" name="remember">Remeber me
+                <!-- <label class="form-check-label" for="exampleCheck1">Remember me </label> -->
+                </td>
+            </tr>
+            <tr>
                 <td><input type="submit" name="login" value="LOGIN" class="btn">
             
                  <a href="signup.php" class="btn"> SignUp</a></td>
@@ -50,12 +56,17 @@ $password=$_POST['password'];
 
     $query=mysqli_query($con,$sql);
     $rows=mysqli_num_rows($query);
+
     if($rows>0)
-
     {
-        $_SESSION['email']=$email;
+        if(isset($_POST["remember"]))   
+        {  
+            setcookie ("email",$email);  
+            setcookie ("password",$password);
+            $_SESSION['email']=$email;
 
-       header("location:dashboard.php");
+        }  
+        header("Location:dashboard.php");
     }
     else
     {
@@ -63,5 +74,7 @@ $password=$_POST['password'];
     }
 
 }
+
+
 
 ?>
