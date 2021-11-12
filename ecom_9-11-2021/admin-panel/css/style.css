@@ -1,0 +1,45 @@
+ table tr td
+{
+  text-align: center;
+  padding: 10px;
+}
+body{
+  
+    margin-top: 10px;
+}
+table{
+
+  border: 2px solid red;
+}
+.btn:hover
+{
+    background-color: pink;
+}
+.btn
+{
+    border-color: pink;
+} 
+
+
+a
+  {
+    color: black;
+    text-decoration:none;
+    margin-left:20px;
+    font-weight:bold;
+  }
+
+
+  .navbar
+  {
+  height:70px;
+  }
+
+i
+{
+  margin-right: 10px;
+}
+
+
+
+
