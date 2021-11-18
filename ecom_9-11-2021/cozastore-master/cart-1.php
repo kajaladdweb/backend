@@ -1,3 +1,29 @@
+<?php
+
+$p_id=$_GET['pid'];
+include "../admin-panel/connection.php";
+
+$sql="select * from product_detail where p_id='$p_id'" or die("error in query");
+
+$query=mysqli_query($con,$sql);
+
+while($row=mysqli_fetch_array($query))
+{
+    $p_name=$row['p_name'];
+    $p_price=$row['p_price'];
+    $p_image=$row['p_image'];
+}  
+
+$query="insert into cart(p_id,p_name,p_price,p_image) values('$p_id','$p_name','$p_price','$p_image')" or die("error in query");
+    if(mysqli_query($con,$query))
+    {
+    }
+    else
+    {
+    }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,6 +55,12 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
 </head>
+<style type="text/css">
+	th
+	{
+		padding: 10px;
+	}
+</style>
 <body class="animsition">
 	
 	<!-- Header -->
@@ -252,7 +284,7 @@
 			
 			<div class="header-cart-content flex-w js-pscroll">
 				<ul class="header-cart-wrapitem w-full">
-					<li class="header-cart-item flex-w flex-t m-b-12">
+					<!-- <li class="header-cart-item flex-w flex-t m-b-12">
 						<div class="header-cart-item-img">
 							<img src="images/item-cart-01.jpg" alt="IMG">
 						</div>
@@ -266,9 +298,40 @@
 								1 x $19.00
 							</span>
 						</div>
-					</li>
+					</li> -->
 
+			<li class="header-cart-item flex-w flex-t m-b-12">
+						
+			
+			<?php
+					include "../admin-panel/connection.php";
+					
+					$query=mysqli_query($con,"select * from cart");
+					while ($row=mysqli_fetch_array($query))
+					{
+
+			?>
+				<ul class="header-cart-wrapitem w-full">
 					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="<?php echo $row['p_image']?>" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+							<?php echo $row['p_name']?>
+							</a>
+
+							<span class="header-cart-item-info">
+								1 x $19.00
+							</span>
+						</div>
+					</li>
+					<?php
+}?>
+
+
+					<!-- <li class="header-cart-item flex-w flex-t m-b-12">
 						<div class="header-cart-item-img">
 							<img src="images/item-cart-02.jpg" alt="IMG">
 						</div>
@@ -298,8 +361,9 @@
 								1 x $17.00
 							</span>
 						</div>
-					</li>
+					</li> -->
 				</ul>
+				
 				
 				<div class="w-full">
 					<div class="header-cart-total w-full p-tb-40">
@@ -307,7 +371,7 @@
 					</div>
 
 					<div class="header-cart-buttons flex-w w-full">
-						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+						<a href="cart-1.php" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
 							View Cart
 						</a>
 
@@ -346,20 +410,44 @@
 							<table class="table-shopping-cart">
 								<tr class="table_head">
 									<th class="column-1">Product</th>
-									<th class="column-2"></th>
+									<th class="column-2">Name</th>
 									<th class="column-3">Price</th>
 									<th class="column-4">Quantity</th>
 									<th class="column-5">Total</th>
+									<th class="column-6">Action</th>
 								</tr>
 
+
+
+                            <?php
+                            include "../admin-panel/connection.php";
+
+                                $sql="select * from cart" or die("error in query");
+
+                                $query=mysqli_query($con,$sql);
+
+                                while($row=mysqli_fetch_array($query))
+                                {
+                                    $cart_id=$row['cart_id'];
+                                    $p_image=$row['p_image'];
+                                    $p_name=$row['p_name'];
+                                    $p_price=$row['p_price'];
+                                    
+                            	?>
 								<tr class="table_row">
 									<td class="column-1">
 										<div class="how-itemcart1">
-											<img src="images/item-cart-04.jpg" alt="IMG">
+									
+
+											<img src="<?php echo $row['p_image'];?>" alt="IMG-PRODUCT">
 										</div>
 									</td>
-									<td class="column-2">Fresh Strawberries</td>
-									<td class="column-3">$ 36.00</td>
+
+									<td class="column-2"><?php echo $row['p_name']; ?></td>
+
+									<td class="column-3">
+										<?php echo $row['p_price'];?></td>
+
 									<td class="column-4">
 										<div class="wrap-num-product flex-w m-l-auto m-r-0">
 											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
@@ -374,9 +462,18 @@
 										</div>
 									</td>
 									<td class="column-5">$ 36.00</td>
-								</tr>
+									<td class="column-6">
+										<a href="delete-cart.php?cartid=<?php echo $cart_id;?>">
+											<i class="fa fa-trash" aria-hidden="true"></i>
+										</a>
+									</td>
 
-								<tr class="table_row">
+								</tr>
+								  <?php
+                                }
+                            ?>
+
+								<!-- <tr class="table_row">
 									<td class="column-1">
 										<div class="how-itemcart1">
 											<img src="images/item-cart-05.jpg" alt="IMG">
@@ -398,7 +495,8 @@
 										</div>
 									</td>
 									<td class="column-5">$ 16.00</td>
-								</tr>
+								</tr>  -->
+
 							</table>
 						</div>
 
@@ -417,7 +515,7 @@
 						</div>
 					</div>
 				</div>
-
+<!-- 
 				<div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
 					<div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
 						<h4 class="mtext-109 cl2 p-b-30">
@@ -500,7 +598,7 @@
 							Proceed to Checkout
 						</button>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</form>

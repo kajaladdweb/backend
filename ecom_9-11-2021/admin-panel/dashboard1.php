@@ -1,3 +1,23 @@
+<?php
+
+session_start();
+include 'connection.php';
+
+if($_SESSION['email']==''){
+    header('Location:login.php');
+}
+
+ else{
+
+    $email=$_SESSION['email'];
+    $query1=mysqli_query($con,"select a_name from admin where a_email='$email'");
+
+    $row1=mysqli_fetch_array($query1);
+   
+ }
+ 
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,7 +77,10 @@ img{
     <!-- navbar started -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="dashboard.php"><img src="../images/pin.png" alt=""></a>
+        <a class="navbar-brand" href="dashboard.php"><img src="../images/logo-01.png" alt=""></a>
+        
+    <?php echo "<center><h4>Hello ".$row1['a_name']."</h4></center>";?>
+    <a href="logout.php" class="btn">logout</a>
     </div>
     </nav>
     <!-- navbar ends -->

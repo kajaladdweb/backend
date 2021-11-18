@@ -18,8 +18,8 @@ echo "<center><h4>Hello ".$row1['a_name']."</h4></center>";
 $query2=mysqli_query($con," select * from product_detail where p_id='$id' ") or die();
 $row2=mysqli_fetch_array($query2);
 
-$p_name=$row2['p_name'];
-$p_price=$row2['p_price'];
+	$p_name=$row2['p_name'];
+	$p_price=$row2['p_price'];
 	$p_desc=$row2['p_desc'];
 	$p_image=$row2['p_image'];
 	$c_name=$row2['c_name'];
@@ -110,13 +110,17 @@ if(isset($_POST['update']))
 	$p_name=$_POST['p_name'];
 	$p_price=$_POST['p_price'];
 	$p_desc=$_POST['p_desc'];
-	$filepath = "../images/".$_FILES["p_image"]["name"];
 	$c_name=$_POST['c_name'];
 	$is_active=$_POST['is_active'];
 
 
 	include 'connection.php';
 	move_uploaded_file($_FILES["p_image"]["tmp_name"], $filepath);
+	if($_FILES["p_image"]["size"]==0){
+        $filepath=$p_image;
+    }else{
+        $filepath = "../images/" . $_FILES["p_image"]["name"];
+    }
 
 
 $sql="update product_detail set p_name='$p_name',p_price='$p_price',p_desc='$p_desc',p_image='$filepath',c_name='$c_name',is_active='$is_active' where p_id=$id";
@@ -133,7 +137,6 @@ echo "data update";
 echo "Error in update";
 }
 
-mysqli_close($con);
 }
 
 ?>

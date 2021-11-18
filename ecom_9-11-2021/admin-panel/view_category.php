@@ -26,9 +26,24 @@
 </head>
 <body>
     <!-- <input type="submit" name="logout" value="logout"> -->
+
+
+    <!-- nav bar -->
+     <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
+        <a class="navbar-brand" href="dashboard.php"><img src="../images/logo-01.png" alt=""></a>
+          <div class="container">
     <a href="logout.php" class="btn">logout</a>
+    
+    <a href="dashboard1.php" class="btn">Back</a>
     </div>
+    </div>
+    </nav>
+
+    <!-- nav bar ends -->
+  <!--   <div class="container">
+    <a href="logout.php" class="btn">logout</a>
+    </div> -->
 </body>
 </html>
 

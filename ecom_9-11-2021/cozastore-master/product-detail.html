@@ -1,3 +1,9 @@
+<?php
+	
+		include 'conection.php';
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -341,7 +347,7 @@
 			</a>
 
 			<span class="stext-109 cl4">
-				Lightweight Jacket
+				<!-- Lightweight Jacket -->
 			</span>
 		</div>
 	</div>
@@ -382,6 +388,15 @@
 									<div class="wrap-pic-w pos-relative">
 										<img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">
 
+<!-- 										<?php
+
+							    $query1=mysqli_query($con,"select p_image from product_detail where p_name='Shirts'");
+							   $row1=mysqli_fetch_array($query1);
+							  
+							   	 echo "<img src=".$row1['p_image']. "height=200 width=200 >"; 
+
+							?>
+ -->
 										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-03.jpg">
 											<i class="fa fa-expand"></i>
 										</a>
@@ -395,15 +410,30 @@
 				<div class="col-md-6 col-lg-5 p-b-30">
 					<div class="p-r-50 p-t-5 p-lr-0-lg">
 						<h4 class="mtext-105 cl2 js-name-detail p-b-14">
-							Lightweight Jacket
+							<!-- Lightweight Jacket -->
+							<?php
+
+							    $query1=mysqli_query($con,"select p_name,p_price,p_desc from product_detail where p_name='Shirts'");
+							   $row1=mysqli_fetch_array($query1);
+							  
+							   	 echo $row1['p_name'];  
+
+							?>
 						</h4>
 
-						<span class="mtext-106 cl2">
+					<!-- 	<span class="mtext-106 cl2">
 							$58.79
+						</span> -->
+
+						<span class="mtext-106 cl2">
+							<?php   
+							    	echo  "$".$row1['p_price']; ?>
 						</span>
 
 						<p class="stext-102 cl3 p-t-23">
-							Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
+
+							<?php   
+							    	echo $row1['p_desc']; ?>
 						</p>
 						
 						<!--  -->
@@ -1126,6 +1156,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 										<div class="wrap-pic-w pos-relative">
 											<img src="images/product-detail-01.jpg" alt="IMG-PRODUCT">
 
+
+
+
 											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-01.jpg">
 												<i class="fa fa-expand"></i>
 											</a>
@@ -1140,8 +1173,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 												<i class="fa fa-expand"></i>
 											</a>
 										</div>
-									</div>
 
+
+										
 									<div class="item-slick3" data-thumb="images/product-detail-03.jpg">
 										<div class="wrap-pic-w pos-relative">
 											<img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">
@@ -1159,7 +1193,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 					<div class="col-md-6 col-lg-5 p-b-30">
 						<div class="p-r-50 p-t-5 p-lr-0-lg">
 							<h4 class="mtext-105 cl2 js-name-detail p-b-14">
-								Lightweight Jacket
+								<!-- Lightweight Jacket -->
+
 							</h4>
 
 							<span class="mtext-106 cl2">
@@ -1362,3 +1397,4 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 </body>
 </html>
+
